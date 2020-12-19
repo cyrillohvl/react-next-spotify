@@ -21,13 +21,16 @@ const Callback: React.FC = () => {
         const expirationDate = new Date();
         expirationDate.setHours(expirationDate.getHours() + 1);
 
-        accessToken.expirationDate = expirationDate;
-      }
+        localStorage.setItem(
+          '@react-app/expirationDate',
+          JSON.stringify(expirationDate),
+        );
 
-      localStorage.setItem(
-        '@react-app/accessToken',
-        'access_token' in accessToken ? JSON.stringify(accessToken) : '',
-      );
+        localStorage.setItem(
+          '@react-app/accessToken',
+          JSON.stringify(accessToken),
+        );
+      }
 
       localStorage.setItem(
         '@react-app/alreadyAuthorized',
