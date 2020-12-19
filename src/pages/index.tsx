@@ -1,7 +1,28 @@
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Styled } from 'theme-ui';
+import Login from '../components/Login';
+import Header from '../components/Header';
 
 const Home: React.FC = () => {
+  const [token, setToken] = useState('');
+
+  const checkStorage = key => {
+    const storedToken = localStorage.getItem(key);
+
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  };
+
+  useEffect(() => {
+    checkStorage('@react-app/accessToken');
+
+    const handler = ({ key }) => checkStorage(key);
+    window.addEventListener('storage', handler);
+
+    return () => window.removeEventListener('storage', handler);
+  }, []);
+
   return (
     <div>
       <Head>
@@ -9,14 +30,11 @@ const Home: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <Styled.h1>
-          React Spotify <small>by Patrick Coutinho</small>
-        </Styled.h1>
-        <Styled.p>
-          Este é um teste com um <small className="small">small text</small>
-        </Styled.p>
-      </main>
+      {token && <Header />}
+
+      <main>{(!token || token == '') && <Login />}</main>
+
+      <footer>React Spotify by Patrick Coutinho</footer>
     </div>
   );
 };
