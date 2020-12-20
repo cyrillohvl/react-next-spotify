@@ -1,17 +1,9 @@
-import React, { InputHTMLAttributes } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Logo from '../assets/spotify.svg';
 import Search from './Search';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  token?: string;
-  setSearchResults?: any;
-  setSearchTerm?: any;
-  searchTerm?: any;
-  searchResults?: any;
-}
-
-const Header: React.FC<InputProps> = props => {
+const Header: React.FC = props => {
   const StyledLogo = styled(Logo)`
     width: 60px;
   `;

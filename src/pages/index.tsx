@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Login from '../components/Login';
 import Header from '../components/Header';
+import SearchResults from '../components/SearchResults';
 
 const Home: React.FC = () => {
   const [token, setToken] = useState('');
@@ -43,7 +44,15 @@ const Home: React.FC = () => {
         />
       )}
 
-      <main>{(!token || token == '') && <Login />}</main>
+      <main>
+        {(!token || token == '') && <Login />}
+        {searchResults && searchTerm && (
+          <SearchResults
+            searchTerm={searchTerm}
+            searchResults={searchResults}
+          />
+        )}
+      </main>
 
       <footer>React Spotify by Patrick Coutinho</footer>
     </div>

@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes, useState } from 'react';
-import { api } from '../services/spotify';
+import { api, authorizeUri } from '../services/spotify';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   token?: string;
@@ -13,12 +13,10 @@ const Search: React.FC<InputProps> = props => {
   const searchType = ['track', 'artist', 'album'];
 
   const handleSearchInput = event => {
-    if (event.target.value.length < 3) {
-      return;
+    if (event.target.value.length > 2) {
+      props.setSearchTerm(event.target.value);
+      handleSearch();
     }
-
-    props.setSearchTerm(event.target.value);
-    handleSearch();
   };
 
   const handleSearch = () => {

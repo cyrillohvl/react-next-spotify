@@ -31,11 +31,6 @@ const Callback: React.FC = () => {
           JSON.stringify(accessToken),
         );
       }
-
-      localStorage.setItem(
-        '@react-app/alreadyAuthorized',
-        'access_token' in accessToken ? '1' : '0',
-      );
     }
 
     router.push('/');
