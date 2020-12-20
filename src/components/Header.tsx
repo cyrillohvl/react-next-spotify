@@ -15,16 +15,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Header: React.FC<InputProps> = props => {
   const router: NextRouter = useRouter();
 
-  console.log(router);
-
-  const StyledLogo = styled(Logo)`
-    width: 60px;
-  `;
-
   return (
     <div className="header">
       <div>
-        <StyledLogo />
+        <Logo />
       </div>
       <div>
         {props.token && router.pathname == '/' && <Search {...props} />}

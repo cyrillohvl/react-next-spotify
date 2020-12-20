@@ -14,10 +14,25 @@ const urlArgs = [
 
 export const authorizeUri: string = `${url}?${urlArgs.join('&')}`;
 
-export const validateTokenExpiration = () => {
-  // se o token está expirado
-  // redireciono no caller o app para pegar um novo
-  return true;
+export const validateTokenExpiration = (expirationDate: string) => {
+  const now = new Date();
+
+  let splitedExpiration = expirationDate.split('T');
+  const date = splitedExpiration[0].replace('"', '').split('-');
+
+  const expirationDateToCompare = new Date(
+    Date.UTC(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2])),
+  );
+
+  const hour = splitedExpiration[1].split(':');
+
+  expirationDateToCompare.setUTCHours(
+    parseInt(hour[0]),
+    parseInt(hour[1]),
+    parseInt(hour[2].substring(0, 2)),
+  );
+
+  return now < expirationDateToCompare;
 };
 
 export const api: AxiosInstance = axios.create({

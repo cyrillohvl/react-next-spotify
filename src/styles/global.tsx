@@ -34,6 +34,10 @@ export default createGlobalStyle`
     grid-template-rows: 1fr;
     gap: 0px 0px;
     grid-template-areas: ". .";
+    svg {
+      width: 60px;
+      height: auto;
+    }
   }
 
   .search {
