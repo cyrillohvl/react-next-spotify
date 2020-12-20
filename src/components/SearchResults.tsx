@@ -1,4 +1,5 @@
 import React, { InputHTMLAttributes } from 'react';
+import Link from 'next/link';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   token?: string;
@@ -16,8 +17,18 @@ const SearchResults: React.FC<InputProps> = props => {
         <div>Álbuns</div>
         {props.searchResults.albums.items.map(album => (
           <div>
-            {album.images.length > 0 && <img src={album.images[0].url} />}
-            <div>{album.name}</div>
+            {album.images.length > 0 && (
+              <Link href={`/album/[pid]`} as={`/album/${album.id}`}>
+                <a>
+                  <img src={album.images[0].url} />
+                </a>
+              </Link>
+            )}
+            <div>
+              <Link href={`/album/[pid]`} as={`/album/${album.id}`}>
+                <a>{album.name}</a>
+              </Link>
+            </div>
             <div>{album.artists[0].name}</div>
           </div>
         ))}
