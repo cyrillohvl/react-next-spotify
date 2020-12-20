@@ -21,6 +21,11 @@ const Home: React.FC<InputProps> = props => {
       </Head>
 
       <main>
+        {!props.searchResults && (
+          <div className="imgAleatoria">
+            <img src="https://campaigns.scdn.co/images/holiday-2020-second-wave.jpg" />
+          </div>
+        )}
         {(!props.token || props.token == '') && <Login />}
 
         {props.searchResults && props.searchTerm && (

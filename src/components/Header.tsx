@@ -1,6 +1,5 @@
 import React, { InputHTMLAttributes } from 'react';
 import { NextRouter, useRouter } from 'next/router';
-import styled from 'styled-components';
 import Logo from '../assets/spotify.svg';
 import Search from './Search';
 

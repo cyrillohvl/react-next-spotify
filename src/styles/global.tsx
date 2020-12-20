@@ -171,7 +171,31 @@ export default createGlobalStyle`
             padding: 10px 0;
             font-size: 18px;
           }
+
+          svg {
+            max-width: 30px;
+            height: auto;
+            margin-right: 10px;
+          }
+
+          span {
+            cursor: pointer;
+          }
         }
       }
+
+      .playing {
+        text-align: center;
+        color: #00d95f;
+        border: 1px solid #00d95f;
+        padding: 20px;
+        margin: 30px 0;
+        border-radius: 20px;
+      }
+    }
+
+    .imgAleatoria {
+      padding: 30px;
+      text-align: center;
     }
 `;

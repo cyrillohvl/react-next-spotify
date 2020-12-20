@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { NextRouter, useRouter } from 'next/router';
 import React, { InputHTMLAttributes, useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { api } from '../../services/spotify';
+import PlayButton from '../../assets/play-button.svg';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   token?: string;
@@ -19,6 +19,7 @@ export interface IAlbum {
 const Album: React.FC<InputProps> = props => {
   const router: NextRouter = useRouter();
   const [album, setAlbum] = useState({
+    id: '',
     name: '',
     label: '',
     images: [],
@@ -27,6 +28,8 @@ const Album: React.FC<InputProps> = props => {
       items: [],
     },
   });
+
+  const [playing, setPlaying] = useState('');
 
   const getAlbum = () => {
     api
@@ -46,6 +49,19 @@ const Album: React.FC<InputProps> = props => {
     getAlbum();
   }, []);
 
+  const handlePlay = event => {
+    if (event.currentTarget.dataset.name == playing) {
+      document.getElementById(event.currentTarget.dataset.id).pause();
+      setPlaying('');
+    } else {
+      var sounds = document.getElementsByTagName('audio');
+      for (let i = 0; i < sounds.length; i++) sounds[i].pause();
+
+      setPlaying(event.currentTarget.dataset.name);
+      document.getElementById(event.currentTarget.dataset.id).play();
+    }
+  };
+
   return (
     <>
       <div className="albumPage">
@@ -54,6 +70,7 @@ const Album: React.FC<InputProps> = props => {
             <a>Voltar</a>
           </Link>
         </div>
+        {playing && <div className="playing">Tocando agora: {playing}</div>}
         <div className="container">
           <div className="details">
             {album.images.length > 0 && <img src={album.images[0].url} />}
@@ -68,11 +85,22 @@ const Album: React.FC<InputProps> = props => {
             {album.tracks.items.length > 0 &&
               album.tracks.items.map(track => (
                 <div>
-                  <audio controls>
+                  <audio id={`track-${track.track_number}-${album.id}`}>
                     <source src={track.preview_url} type="audio/mpeg"></source>
                   </audio>
-                  <br />
-                  {track.track_number} - {track.name} <hr />
+                  <div className="trackName">
+                    {track.preview_url && (
+                      <span
+                        onClick={handlePlay}
+                        data-id={`track-${track.track_number}-${album.id}`}
+                        data-name={track.name}
+                      >
+                        <PlayButton />
+                      </span>
+                    )}{' '}
+                    {track.track_number} - {track.name}
+                  </div>{' '}
+                  <hr />
                 </div>
               ))}
           </div>
