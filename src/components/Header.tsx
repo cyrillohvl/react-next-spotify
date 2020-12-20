@@ -22,7 +22,7 @@ const Header: React.FC<InputProps> = props => {
   `;
 
   return (
-    <div className="nav">
+    <div className="header">
       <div>
         <StyledLogo />
       </div>

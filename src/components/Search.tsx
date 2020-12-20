@@ -34,14 +34,14 @@ const Search: React.FC<InputProps> = props => {
   };
 
   return (
-    <>
+    <div className="search">
       <label htmlFor="search">Busque por álbuns</label>
       <input
         type="text"
         placeholder="Comece a escrever..."
         onInput={handleSearchInput}
       />
-    </>
+    </div>
   );
 };
 

@@ -17,6 +17,7 @@ const Home: React.FC<InputProps> = props => {
     <>
       <Head>
         <title>React Spotify by Patrick Coutinho</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
       <main>
@@ -29,8 +30,6 @@ const Home: React.FC<InputProps> = props => {
           />
         )}
       </main>
-
-      <footer>React Spotify by Patrick Coutinho</footer>
     </>
   );
 };

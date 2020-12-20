@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { NextRouter, useRouter } from 'next/router';
 import React, { InputHTMLAttributes, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { api } from '../../services/spotify';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -47,24 +48,34 @@ const Album: React.FC<InputProps> = props => {
 
   return (
     <>
-      <div>
+      <div className="albumPage">
         <div>
           <Link href={`/`} as={`/`}>
             <a>Voltar</a>
           </Link>
         </div>
-        {album.images.length > 0 && <img src={album.images[0].url} />}
-        <div>{album.name}</div>
-        <div>{album.artists.length > 0 && album.artists[0].name}</div>
-        <div>{album.label}</div>
+        <div className="container">
+          <div className="details">
+            {album.images.length > 0 && <img src={album.images[0].url} />}
+            <h1 className="name">{album.name}</h1>
+            <h2 className="artist">
+              {album.artists.length > 0 && album.artists[0].name}
+            </h2>
+            <div className="label">{album.label}</div>
+          </div>
 
-        <div>
-          {album.tracks.items.length > 0 &&
-            album.tracks.items.map(track => (
-              <div>
-                {track.track_number} - {track.name}{' '}
-              </div>
-            ))}
+          <div className="tracksList">
+            {album.tracks.items.length > 0 &&
+              album.tracks.items.map(track => (
+                <div>
+                  <audio controls>
+                    <source src={track.preview_url} type="audio/mpeg"></source>
+                  </audio>
+                  <br />
+                  {track.track_number} - {track.name} <hr />
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </>

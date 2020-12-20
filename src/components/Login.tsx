@@ -4,11 +4,11 @@ import { authorizeUri, api } from '../services/spotify';
 
 const Login: React.FC = () => {
   return (
-    <>
+    <div className="login">
       <Link href={authorizeUri}>
         <a>Fazer login no Spotify</a>
       </Link>
-    </>
+    </div>
   );
 };
 

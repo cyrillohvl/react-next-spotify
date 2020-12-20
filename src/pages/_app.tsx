@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from '../styles/theme';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const [token, setToken] = useState('');
@@ -46,6 +47,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         searchTerm={searchTerm}
         searchResults={searchResults}
       />
+      <Footer />
       <GlobalStyles />
     </ThemeProvider>
   );
