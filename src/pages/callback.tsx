@@ -19,7 +19,7 @@ const Callback: React.FC = () => {
 
       if ('access_token' in accessToken) {
         const expirationDate = new Date();
-        expirationDate.setMinutes(expirationDate.getMinutes() + 5);
+        expirationDate.setHours(expirationDate.getHours() + 1);
 
         localStorage.setItem(
           '@react-app/expirationDate',
