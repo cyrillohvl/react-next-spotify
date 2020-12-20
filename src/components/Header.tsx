@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import Logo from '../assets/spotify.svg';
 import Search from './Search';
 
-const Header: React.FC = () => {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  token?: string;
+  setSearchResults?: any;
+  setSearchTerm?: any;
+  searchTerm?: any;
+  searchResults?: any;
+}
+
+const Header: React.FC<InputProps> = props => {
   const StyledLogo = styled(Logo)`
     width: 60px;
   `;
@@ -14,7 +22,7 @@ const Header: React.FC = () => {
         <StyledLogo />
       </div>
       <div>
-        <Search />
+        <Search {...props} />
       </div>
     </div>
   );

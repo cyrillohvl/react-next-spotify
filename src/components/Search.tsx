@@ -1,10 +1,48 @@
-import React from 'react';
+import React, { InputHTMLAttributes, useState } from 'react';
+import { api } from '../services/spotify';
 
-const Search: React.FC = () => {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  token?: string;
+  setSearchTerm?: any;
+  setSearchResults?: any;
+  handleSearchInput?: any;
+  searchTerm?: string;
+}
+
+const Search: React.FC<InputProps> = props => {
+  const searchType = ['track', 'artist', 'album'];
+
+  const handleSearchInput = event => {
+    if (event.target.value.length < 3) {
+      return;
+    }
+
+    props.setSearchTerm(event.target.value);
+    handleSearch();
+  };
+
+  const handleSearch = () => {
+    api
+      .get(`search?q=${props.searchTerm}&type=${searchType.join(',')}`, {
+        headers: { Authorization: `Bearer ${props.token}` },
+      })
+      .then(response => {
+        props.setSearchResults(response.data);
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <label htmlFor="search">Busque por álbuns</label>
-      <input type="text" placeholder="Comece a escrever..." id="search" />
+      <input
+        type="text"
+        placeholder="Comece a escrever..."
+        onInput={handleSearchInput}
+      />
     </>
   );
 };

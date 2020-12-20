@@ -5,12 +5,15 @@ import Header from '../components/Header';
 
 const Home: React.FC = () => {
   const [token, setToken] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState('');
 
   const checkStorage = key => {
     const storedToken = localStorage.getItem(key);
 
     if (storedToken) {
-      setToken(storedToken);
+      const tokenObject = JSON.parse(storedToken);
+      setToken(tokenObject.access_token);
     }
   };
 
@@ -30,7 +33,15 @@ const Home: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {token && <Header />}
+      {token && (
+        <Header
+          token={token}
+          setSearchResults={setSearchResults}
+          setSearchTerm={setSearchTerm}
+          searchTerm={searchTerm}
+          searchResults={searchResults}
+        />
+      )}
 
       <main>{(!token || token == '') && <Login />}</main>
 
