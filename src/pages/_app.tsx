@@ -28,7 +28,6 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
         console.log('aqui2');
       } else {
         console.log('aqui');
-        // window.location.href = authorizeUri;
         localStorage.removeItem('@react-app/accessToken');
         localStorage.removeItem('@react-app/expirationDate');
       }
