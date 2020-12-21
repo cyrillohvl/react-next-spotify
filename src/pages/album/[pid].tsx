@@ -50,15 +50,19 @@ const Album: React.FC<InputProps> = props => {
   }, []);
 
   const handlePlay = event => {
+    const audioPlayer: HTMLVideoElement = document.getElementById(
+      event.currentTarget.dataset.id,
+    ) as HTMLVideoElement;
+
     if (event.currentTarget.dataset.name == playing) {
-      document.getElementById(event.currentTarget.dataset.id).pause();
+      audioPlayer.pause();
       setPlaying('');
     } else {
       var sounds = document.getElementsByTagName('audio');
       for (let i = 0; i < sounds.length; i++) sounds[i].pause();
 
       setPlaying(event.currentTarget.dataset.name);
-      document.getElementById(event.currentTarget.dataset.id).play();
+      audioPlayer.play();
     }
   };
 
